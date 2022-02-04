@@ -11,7 +11,7 @@ def update_client(client):
     sky_client = skynet.SkynetClient()
     link = f'https://siasky.net/{sky_client.upload_file(f"{client}.json")[6:]}'
     os.system(f'bash fetch_swagger_client.sh {client} {link} python')
-    # assert pytest.main(["-x", f"{client}_client/test"]) == ExitCode.OK
+    assert pytest.main(["-x", f"{client}_client/test"]) == ExitCode.OK
     with fileinput.FileInput(f'{client}_client/setup.py', inplace=True) as file:
         for line in file:
             if "VERSION = " in line:
